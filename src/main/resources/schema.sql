@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+`username` varchar(64) NOT NULL DEFAULT '0' COMMENT '用户名',
+`name` varchar(64) NOT NULL DEFAULT '' COMMENT '姓名',
+`age` varchar(64) NOT NULL DEFAULT '' COMMENT '年龄'
+)ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
