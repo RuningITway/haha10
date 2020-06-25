@@ -9,7 +9,6 @@ import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,39 +35,19 @@ public class PositionController {
     private TransactionsService transactionsService;
 
 
-    @GetMapping("/selectList")
-    public List<Position> selectList() {
-        List<Position> list = null;
-        try {
-            list = positionService.selectList();
-            if (CollectionUtils.isEmpty(list)) {
-                LOGGER.error("==position do not have data");
-                return null;
-            }
+    @PostMapping("/getResultPosition")
+    public List<Position> getResultPosition(@RequestParam Map<String, Object> map1) {
 
-            LOGGER.info("==position list.size():{}", list.size());
-
-        } catch (Exception e) {
-            LOGGER.error("==错误:{}", e.getMessage(), e);
-        }
-
-        return list;
-    }
-
-
-    @PostMapping("/insert1111")
-    public void insert1111(@RequestParam Map<String, Object> map1) {
-
-
+        List<Position> listResult = new ArrayList<Position>();
         try {
 
-            //【1】全部查出来
+            //【2】全部查出来
             List<Transactions> list1 = new ArrayList<Transactions>();
             List<Transactions> list2 = new ArrayList<Transactions>();
             List<Transactions> list3 = new ArrayList<Transactions>();
             List<Transactions> list = transactionsService.selectListTransactions();
 
-            //【2】根据SecurityCode分组
+            //【3】根据SecurityCode分组
             //List里面的对象元素，以某个属性来分组，以SecurityCode分组，将SecurityCode相同的放在一起
             Map<String, List<Transactions>> map2 = list.stream().collect(Collectors.groupingBy(Transactions::getSecurityCode));
             list1 = map2.get(SECURITY_CODE_REL);
@@ -76,19 +55,29 @@ public class PositionController {
             list3 = map2.get(SECURITY_CODE_INF);
 
 
-            //【3】遍历，根据Buy/Sell 的标记，判断是加号+，还是减号-
-            //【4】根据Insert/Update/Cancel 标记，判断计算规则
-            //【5】把动态计算的结果保存到 Position 表
+            //【4】遍历，根据Buy/Sell 的标记，判断是加号+，还是减号-
+            //【5】根据Insert/Update/Cancel 标记，判断计算规则
+            //【6】把动态计算的结果保存到 Position 表
             calSum(list1, SECURITY_CODE_REL);
             calSum(list2, SECURITY_CODE_ITC);
             calSum(list3, SECURITY_CODE_INF);
 
+            //【7】查询 Position 表，UI展示
+            listResult = positionService.selectList();
+            if (CollectionUtils.isEmpty(list)) {
+                LOGGER.error("==position do not have data");
+                return null;
+            }
+
+            LOGGER.info("==position list.size():{}", list.size());
 
 
         } catch (Exception e) {
-            LOGGER.error("==错误:{}", e.getMessage(), e);
+            LOGGER.error("==动态获取交易结果错误:{}", e.getMessage(), e);
+            return listResult;
         }
 
+        return listResult;
     }
 
 

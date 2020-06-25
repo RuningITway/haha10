@@ -21,13 +21,14 @@ public class TransactionController {
     private TransactionsService transactionsService;
 
 
-    @PostMapping("/insert111")
-    public int insert111(@RequestParam Map<String, Object> map1) {
+    @PostMapping("/initTransactionsData")
+    public int initTransactionsData(@RequestParam Map<String, Object> map1) {
 
+        //【1】初始化Transactions 数据
         int n = 0;
         try {
 
-            LOGGER.info("==input map1:{}", map1.toString());
+            LOGGER.info("==TransactionController#initTransactionsData ，input map1:{}", map1.toString());
 
             int tradeID = MapUtils.getInteger(map1, "tradeID", 0);
             int version = MapUtils.getInteger(map1, "version", 0);
@@ -39,7 +40,8 @@ public class TransactionController {
             n = transactionsService.insert1(tradeID, version, securityCode, quantity, operationType, buySellType);
 
         } catch (Exception e) {
-            LOGGER.error("==错误:{}", e.getMessage(), e);
+            LOGGER.error("==initTransactionsData error:{}", e.getMessage(), e);
+            return 0;
         }
         return n;
     }
