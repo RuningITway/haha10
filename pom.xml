@@ -136,7 +136,7 @@
     </dependencies>
 
     <build>
-        <finalName>haha9</finalName>
+        <finalName>haha10</finalName>
 
         <plugins>
             <plugin>
