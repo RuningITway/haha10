@@ -1,7 +1,7 @@
 package com.shunlian.mapper;
 
 
-import com.shunlian.entity.Shipment;
+import com.shunlian.entity.ShipmentItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface ShipmentItemRep extends JpaRepository<Shipment, Long> {
+public interface ShipmentItemRep extends JpaRepository<ShipmentItem, Long> {
 
 
     @Transactional
@@ -23,29 +23,7 @@ public interface ShipmentItemRep extends JpaRepository<Shipment, Long> {
     public int insert1(int shipmentId, String pId, String pName, String pQuanty, String pType) throws Exception;
 
 
-    @Query(value = "select id from Shipment_item where p_id =?1 order by id desc", nativeQuery = true)
-    public List<Integer> findItemId(String pId) throws Exception;
-
-
-//
-//    @Query(value = "select * from Employee  where id = ?1", nativeQuery = true)
-//    public Employee findObj(int id) throws Exception;
-//
-//
-//    @Transactional
-//    @Modifying
-//    @Query(value = "update Employee u set u.name = ?1 where u.id = ?2", nativeQuery = true)
-//    int update1(String name, long id) throws Exception;
-//
-//    @Transactional
-//    @Modifying
-//    @Query(value = "insert into Employee(name) values(?1)", nativeQuery = true)
-//    int insert1(String name) throws Exception;
-//
-//    @Transactional
-//    @Modifying
-//    @Query(value = "delete Employee where id=?1", nativeQuery = true)
-//    public int delete1(long id) throws Exception;
-
+    @Query(value = "select id,p_id,p_name,p_quanty,p_type,shipment_id from Shipment_Item order by id asc", nativeQuery = true)
+    public List<ShipmentItem> selectListResult() throws Exception;
 
 }

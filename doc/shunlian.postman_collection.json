@@ -1,0 +1,147 @@
+{
+  "variables": [],
+  "info": {
+    "name": "shunlian",
+    "_postman_id": "aec377b7-e0f4-a115-412b-840599a8b554",
+    "description": "",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "http://localhost:8080/getShipmentItemResult",
+      "request": {
+        "url": "http://localhost:8080/getShipmentItemResult",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": []
+        },
+        "description": "获取shipmentItem结果"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/setShipmentData",
+      "request": {
+        "url": "http://localhost:8080/setShipmentData",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "pId",
+              "value": "bb",
+              "type": "text",
+              "enabled": true
+            },
+            {
+              "key": "pName",
+              "value": "bb",
+              "type": "text",
+              "enabled": true
+            },
+            {
+              "key": "pQuanty",
+              "value": "100",
+              "type": "text",
+              "enabled": true
+            }
+          ]
+        },
+        "description": "设置船运管理运输数据"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/initTransactionsData",
+      "request": {
+        "url": "http://localhost:8080/initTransactionsData",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "tradeID",
+              "value": "10",
+              "type": "text",
+              "enabled": true
+            },
+            {
+              "key": "version",
+              "value": "10",
+              "type": "text",
+              "enabled": true
+            },
+            {
+              "key": "securityCode",
+              "value": "REL",
+              "type": "text",
+              "enabled": true
+            },
+            {
+              "key": "quantity",
+              "value": "10",
+              "type": "text",
+              "enabled": true
+            },
+            {
+              "key": "operationType",
+              "value": "INSERT",
+              "type": "text",
+              "enabled": true
+            },
+            {
+              "key": "buySellType",
+              "value": "BUY",
+              "type": "text",
+              "enabled": true
+            }
+          ]
+        },
+        "description": "初始化交易数据"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/getResultPosition",
+      "request": {
+        "url": "http://localhost:8080/getResultPosition",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": []
+        },
+        "description": "动态获取交易结果"
+      },
+      "response": []
+    }
+  ]
+}

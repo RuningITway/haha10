@@ -19,3 +19,20 @@ maven版本：3.3.9
 
 
 ------------------------------------------------
+Code requirements for  'Equity Positions' or 'Shipment Management':
+1. Spring boot project (configuration of .yml or .properties);
+2. Maven project (pom.xml);
+3. H2 DB(Bonus item);
+4. Data protection mechanism;
+5. Parameter protection mechanism;
+6. Interface exception definition;
+7. Necessary comments for core logic;
+8. Readme or note of design;
+9. UT for controller;
+10.UT for interface;
+11.UT for failure and exception;
+12.Log(Bonus item);
+13.Rest API of data initialized to display the result(Bonus item)(Not UT).
+
+
+------------------------------------------------

@@ -1,15 +1,19 @@
 package com.shunlian.controller;
 
+import com.shunlian.entity.ShipmentItem;
 import com.shunlian.service.ShipmentItemService;
 import com.shunlian.service.ShipmentService;
 import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -25,8 +29,8 @@ public class ShipmentController {
     private ShipmentItemService shipmentItemService;
 
 
-    @PostMapping("/insert11")
-    public int insert11(@RequestParam Map<String, Object> map1) {
+    @PostMapping("/setShipmentData")
+    public int setShipmentData(@RequestParam Map<String, Object> map1) {
 
         int n = 0;
         try {
@@ -62,6 +66,29 @@ public class ShipmentController {
         }
         return n;
     }
+
+
+    @PostMapping("/getShipmentItemResult")
+    public List<ShipmentItem> getShipmentItemResult(@RequestParam Map<String, Object> map1) {
+
+        List<ShipmentItem> listResult = new ArrayList<ShipmentItem>();
+        try {
+
+            listResult = shipmentItemService.selectListResult();
+            if (CollectionUtils.isEmpty(listResult)) {
+                LOGGER.error("==获取shipmentItem结果无数据");
+                return null;
+            }
+
+            LOGGER.error("==listResult.size():{}", listResult.size());
+
+        } catch (Exception e) {
+            LOGGER.error("==获取shipmentItem结果错误:{}", e.getMessage(), e);
+            return listResult;
+        }
+        return listResult;
+    }
+
 
 
 }

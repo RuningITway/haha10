@@ -1,5 +1,6 @@
 package com.shunlian.service.impl;
 
+import com.shunlian.entity.ShipmentItem;
 import com.shunlian.mapper.ShipmentItemRep;
 import com.shunlian.service.ShipmentItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +20,15 @@ public class ShipmentItemServiceImpl implements ShipmentItemService {
         return shipmentItemRep.insert1(shipmentId, pId, pName, pQuanty, pType);
     }
 
-    @Override
-    public List<Integer> findItemId(String pId) throws Exception {
-        return shipmentItemRep.findItemId(pId);
-    }
 
     @Override
     public int delete1(int id) throws Exception {
         return shipmentItemRep.delete1(id);
+    }
+
+    @Override
+    public List<ShipmentItem> selectListResult() throws Exception {
+        return shipmentItemRep.selectListResult();
     }
 
 

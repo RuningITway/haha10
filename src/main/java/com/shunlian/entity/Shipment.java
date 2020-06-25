@@ -18,4 +18,6 @@ public class Shipment {
 
     private String pName;
     private String pQuanty;
+
+
 }
