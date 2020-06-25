@@ -11,14 +11,20 @@ public interface EmployeeService {
 
     public List<Employee> findAll();
 
-
     public void save(@RequestBody Employee employee);
-
 
     public void update(@RequestBody Employee employee);
 
-
     public void delete(@PathVariable Long id);
+
+
+    public Employee findObj(int id) throws Exception;
+
+    public int insert1(String name) throws Exception;
+
+    public int update1(String name, long id) throws Exception;
+
+    public int delete1(long id) throws Exception;
 
 
 }

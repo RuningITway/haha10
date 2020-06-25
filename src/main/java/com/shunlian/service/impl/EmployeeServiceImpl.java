@@ -21,8 +21,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public Employee findObj(int id) throws Exception {
+        return employeeRep.findObj(id);
+    }
+
+    @Override
     public void save(Employee employee) {
         employeeRep.save(employee);
+    }
+
+    @Override
+    public int insert1(String name) throws Exception {
+        return employeeRep.insert1(name);
     }
 
     @Override
@@ -31,7 +41,21 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public int update1(String name, long id) throws Exception {
+        return employeeRep.update1(name, id);
+    }
+
+
+    @Override
     public void delete(Long id) {
         employeeRep.delete(id);
     }
+
+
+    @Override
+    public int delete1(long id) throws Exception {
+        return employeeRep.delete1(id);
+    }
+
+
 }
