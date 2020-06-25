@@ -71,6 +71,8 @@ public class PositionController {
             list3 = map2.get("INF");
 
             //【3】遍历，根据Buy/Sell 的标记，判断是加号+，还是减号-
+            //【4】根据Insert/Update/Cancel 标记，判断计算规则
+            //【5】把动态计算的结果保存到 Position 表
             int sum1 = calSum(list1);
             String securityCode = "REL";
             int quantity = sum1;
@@ -95,6 +97,7 @@ public class PositionController {
         }
         return n;
     }
+
 
     public int calSum(List<Transactions> list) {
         int sum = 0;
