@@ -10,6 +10,10 @@ public interface PositionService {
 
     public List<Position> selectList() throws Exception;
 
+    public Position selectObjectBySc(String securityCode) throws Exception;
+
+    public int update1(int quantity, String securityCode) throws Exception;
+
 
 }
 

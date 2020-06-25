@@ -24,6 +24,11 @@ import java.util.stream.Collectors;
 public class PositionController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PositionController.class);
+    private static final String SECURITY_CODE_REL = "REL";
+    private static final String SECURITY_CODE_ITC = "ITC";
+    private static final String SECURITY_CODE_INF = "INF";
+
+
 
     @Autowired
     private PositionService positionService;
@@ -52,9 +57,9 @@ public class PositionController {
 
 
     @PostMapping("/insert1111")
-    public int insert1111(@RequestParam Map<String, Object> map1) {
+    public void insert1111(@RequestParam Map<String, Object> map1) {
 
-        int n = 0;
+
         try {
 
             //【1】全部查出来
@@ -64,44 +69,33 @@ public class PositionController {
             List<Transactions> list = transactionsService.selectListTransactions();
 
             //【2】根据SecurityCode分组
-            //List里面的对象元素，以某个属性来分组，例如，以SecurityCode分组，将SecurityCode相同的放在一起
+            //List里面的对象元素，以某个属性来分组，以SecurityCode分组，将SecurityCode相同的放在一起
             Map<String, List<Transactions>> map2 = list.stream().collect(Collectors.groupingBy(Transactions::getSecurityCode));
-            list1 = map2.get("REL");
-            list2 = map2.get("ITC");
-            list3 = map2.get("INF");
+            list1 = map2.get(SECURITY_CODE_REL);
+            list2 = map2.get(SECURITY_CODE_ITC);
+            list3 = map2.get(SECURITY_CODE_INF);
+
 
             //【3】遍历，根据Buy/Sell 的标记，判断是加号+，还是减号-
             //【4】根据Insert/Update/Cancel 标记，判断计算规则
             //【5】把动态计算的结果保存到 Position 表
-            int sum1 = calSum(list1);
-            String securityCode = "REL";
-            int quantity = sum1;
-            LOGGER.info("==list1==securityCode:{},quantity:{}", securityCode, quantity);
-            int n1 = positionService.insert1("REL", sum1);
+            calSum(list1, SECURITY_CODE_REL);
+            calSum(list2, SECURITY_CODE_ITC);
+            calSum(list3, SECURITY_CODE_INF);
 
-            int sum2 = calSum(list2);
-            String securityCode2 = "ITC";
-            int quantity2 = sum2;
-            LOGGER.info("==list2==securityCode2:{},quantity2:{}", securityCode2, quantity2);
-            int n2 = positionService.insert1("ITC", sum2);
 
-            int sum3 = calSum(list3);
-            String securityCode3 = "INF";
-            int quantity3 = sum3;
-            LOGGER.info("==list3==securityCode3:{},quantity3:{}", securityCode3, quantity3);
-            int n3 = positionService.insert1("INF", sum3);
 
-            n = n1 + n2 + n3;
         } catch (Exception e) {
             LOGGER.error("==错误:{}", e.getMessage(), e);
         }
-        return n;
+
     }
 
 
-    public int calSum(List<Transactions> list) {
+    public void calSum(List<Transactions> list, String securityCode) throws Exception {
         int sum = 0;
 
+        //calculate
         for (Transactions tran1 : list) {
             if (tran1.getBuySellType().equalsIgnoreCase("Buy")) {
                 int a = tran1.getQuantity();
@@ -139,7 +133,17 @@ public class PositionController {
             }
 
         }
-        return sum;
+
+        //operation table
+        Position position1 = positionService.selectObjectBySc(securityCode);
+        if (null != position1) {
+            //update
+            positionService.update1(sum, securityCode);
+        } else {
+            //insert
+            positionService.insert1(securityCode, sum);
+        }
+
     }
 
 

@@ -24,4 +24,16 @@ public class PositionServiceImpl implements PositionService {
     public List<Position> selectList() throws Exception {
         return positionRep.selectList();
     }
+
+    @Override
+    public Position selectObjectBySc(String securityCode) throws Exception {
+        return positionRep.selectObjectBySc(securityCode);
+    }
+
+    @Override
+    public int update1(int quantity, String securityCode) throws Exception {
+        return positionRep.update1(quantity, securityCode);
+    }
+
+
 }

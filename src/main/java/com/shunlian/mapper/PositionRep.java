@@ -21,5 +21,13 @@ public interface PositionRep extends JpaRepository<Position, Long> {
     @Query(value = "select id,quantity,security_code from Position order by quantity desc", nativeQuery = true)
     public List<Position> selectList() throws Exception;
 
+    @Query(value = "select id,quantity,security_code from Position where security_code =?1  limit 1", nativeQuery = true)
+    public Position selectObjectBySc(String securityCode) throws Exception;
+
+    @Transactional
+    @Modifying
+    @Query(value = "update Position  set quantity=?1 where security_code =?2", nativeQuery = true)
+    public int update1(int quantity, String securityCode) throws Exception;
+
 
 }
