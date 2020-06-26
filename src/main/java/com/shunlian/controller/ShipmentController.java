@@ -8,7 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,7 +36,7 @@ public class ShipmentController {
      * @param map1
      * @return
      */
-    @PostMapping("/setShipmentData")
+    @RequestMapping(value = "/setShipmentData", method = {RequestMethod.POST, RequestMethod.GET})
     public int setShipmentData(@RequestParam Map<String, Object> map1) {
 
         int n = 0;
@@ -80,7 +81,7 @@ public class ShipmentController {
      * @param map1
      * @return
      */
-    @PostMapping("/getShipmentItemResult")
+    @RequestMapping(value = "/getShipmentItemResult", method = {RequestMethod.POST, RequestMethod.GET})
     public List<ShipmentItem> getShipmentItemResult(@RequestParam Map<String, Object> map1) {
 
         List<ShipmentItem> listResult = new ArrayList<ShipmentItem>();

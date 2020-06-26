@@ -5,7 +5,8 @@ import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +28,7 @@ public class TransactionController {
      * @param map1
      * @return
      */
-    @PostMapping("/initTransactionsData")
+    @RequestMapping(value = "/initTransactionsData", method = {RequestMethod.POST, RequestMethod.GET})
     public int initTransactionsData(@RequestParam Map<String, Object> map1) {
 
         //【1】初始化Transactions 数据

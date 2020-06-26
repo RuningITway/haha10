@@ -9,7 +9,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,7 +42,7 @@ public class PositionController {
      * @param map1
      * @return
      */
-    @PostMapping("/getResultPosition")
+    @RequestMapping(value = "/getResultPosition", method = {RequestMethod.POST, RequestMethod.GET})
     public List<Position> getResultPosition(@RequestParam Map<String, Object> map1) {
 
         List<Position> listResult = new ArrayList<Position>();
@@ -89,6 +90,11 @@ public class PositionController {
 
     public void calSum(List<Transactions> list, String securityCode) throws Exception {
         int sum = 0;
+
+        if (CollectionUtils.isEmpty(list)) {
+            LOGGER.error("==list is null,calculate sum  return ");
+            return;
+        }
 
         //calculate
         for (Transactions tran1 : list) {
