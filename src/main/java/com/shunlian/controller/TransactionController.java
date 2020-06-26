@@ -21,6 +21,12 @@ public class TransactionController {
     private TransactionsService transactionsService;
 
 
+    /****
+     * initTransactionsData
+     * 初始化交易数据
+     * @param map1
+     * @return
+     */
     @PostMapping("/initTransactionsData")
     public int initTransactionsData(@RequestParam Map<String, Object> map1) {
 

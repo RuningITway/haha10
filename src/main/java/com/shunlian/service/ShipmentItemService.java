@@ -10,6 +10,12 @@ public interface ShipmentItemService {
 
     public int delete1(int id) throws Exception;
 
+    /***
+     *  getShipmentItemResult
+     *  获取shipmentItem结果
+     * @return
+     * @throws Exception
+     */
     public List<ShipmentItem> selectListResult() throws Exception;
 
 

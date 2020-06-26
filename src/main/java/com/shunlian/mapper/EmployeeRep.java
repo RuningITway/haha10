@@ -13,8 +13,20 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+/***
+ *
+ * tip: only for hj test , ignore
+ *
+ *
+ */
 public interface EmployeeRep extends JpaRepository<Employee, Long> {
 
+    /***
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @Query(value = "select * from Employee  where id = ?1", nativeQuery = true)
     public Employee findObj(int id) throws Exception;
 

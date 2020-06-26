@@ -15,6 +15,15 @@ public interface ShipmentRep extends JpaRepository<Shipment, Long> {
     @Query(value = "delete Shipment where id=?1", nativeQuery = true)
     public int delete1(int id) throws Exception;
 
+    /***
+     *    setShipmentData
+     *   设置船运管理运输数据
+     * @param pId
+     * @param pName
+     * @param pQuanty
+     * @return
+     * @throws Exception
+     */
     @Transactional
     @Modifying
     @Query(value = "insert into Shipment(p_Id,p_Name,p_Quanty) values(?1,?2,?3)", nativeQuery = true)

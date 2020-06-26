@@ -1,7 +1,7 @@
 
 ------------------------------------------------
 项目结构说明:
-project name : haha9
+project name : haha10
 springboot版本：1.5.10.RELEASE
 jdk版本：1.8
 maven版本：3.3.9

@@ -35,6 +35,12 @@ public class PositionController {
     private TransactionsService transactionsService;
 
 
+    /****
+     * getResultPosition
+     * 动态获取交易结果
+     * @param map1
+     * @return
+     */
     @PostMapping("/getResultPosition")
     public List<Position> getResultPosition(@RequestParam Map<String, Object> map1) {
 
@@ -86,7 +92,7 @@ public class PositionController {
 
         //calculate
         for (Transactions tran1 : list) {
-            if (tran1.getBuySellType().equalsIgnoreCase("Buy")) {
+            if ("Buy".equalsIgnoreCase(tran1.getBuySellType())) {
                 int a = tran1.getQuantity();
                 switch (tran1.getOperationType()) {
                     case "INSERT":
@@ -101,9 +107,10 @@ public class PositionController {
                         //update 0
                         sum = 0;
                         break;
+                    default:
                 }
 
-            } else if (tran1.getBuySellType().equalsIgnoreCase("Sell")) {
+            } else if ("Sell".equalsIgnoreCase(tran1.getBuySellType())) {
                 int a = -(tran1.getQuantity());
                 switch (tran1.getOperationType()) {
                     case "INSERT":
@@ -118,6 +125,7 @@ public class PositionController {
                         //update 0
                         sum = 0;
                         break;
+                    default:
                 }
             }
 

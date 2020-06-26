@@ -6,6 +6,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
+/***
+ *
+ * tip: only for hj test , ignore
+ *
+ *
+ */
 public interface EmployeeService {
 
 

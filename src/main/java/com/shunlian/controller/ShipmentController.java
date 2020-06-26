@@ -29,6 +29,12 @@ public class ShipmentController {
     private ShipmentItemService shipmentItemService;
 
 
+    /***
+     * setShipmentData
+     * 设置船运管理运输数据
+     * @param map1
+     * @return
+     */
     @PostMapping("/setShipmentData")
     public int setShipmentData(@RequestParam Map<String, Object> map1) {
 
@@ -68,6 +74,12 @@ public class ShipmentController {
     }
 
 
+    /***
+     * getShipmentItemResult
+     * 获取shipmentItem结果
+     * @param map1
+     * @return
+     */
     @PostMapping("/getShipmentItemResult")
     public List<ShipmentItem> getShipmentItemResult(@RequestParam Map<String, Object> map1) {
 

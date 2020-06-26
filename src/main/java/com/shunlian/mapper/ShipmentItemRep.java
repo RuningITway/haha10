@@ -23,6 +23,12 @@ public interface ShipmentItemRep extends JpaRepository<ShipmentItem, Long> {
     public int insert1(int shipmentId, String pId, String pName, String pQuanty, String pType) throws Exception;
 
 
+    /***
+     *  getShipmentItemResult
+     *   获取shipmentItem结果
+     * @return
+     * @throws Exception
+     */
     @Query(value = "select id,p_id,p_name,p_quanty,p_type,shipment_id from Shipment_Item order by id asc", nativeQuery = true)
     public List<ShipmentItem> selectListResult() throws Exception;
 

@@ -8,6 +8,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/***
+ *
+ * tip: only for hj test , ignore
+ *
+ *
+ */
 @Service(value = "employeeService")
 public class EmployeeServiceImpl implements EmployeeService {
 
